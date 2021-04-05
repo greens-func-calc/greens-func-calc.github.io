@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { simplify, parse, evaluate, derivative } = require("mathjs");
+import { simplify, parse, evaluate, derivative } from "mathjs";
 
 export function GreensFctCalc(y1, y2) {
   const y1_xs = y1;
