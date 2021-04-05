@@ -2,13 +2,6 @@
   import * as S from "svelte-materialify/src";
 </script>
 
-<style>
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-</style>
-
 <S.MaterialApp>
   <S.AppBar dense>
     <span slot="title"> Title </span>
@@ -35,15 +28,28 @@
       <span slot="badge"> 3 </span>
     </S.Badge>
     <h3>Forms</h3>
-	<S.TextField>Text Field</S.TextField>
-	<S.Select
-      items={[{ name: 'Foo', value: 'foo' }, { name: 'Bar', value: 'bar' }, { name: 'Fizz', value: 'fizz' }, { name: 'Buzz', value: 'buzz' }]}>
+    <S.TextField>Text Field</S.TextField>
+    <S.Select
+      items={[
+        { name: "Foo", value: "foo" },
+        { name: "Bar", value: "bar" },
+        { name: "Fizz", value: "fizz" },
+        { name: "Buzz", value: "buzz" },
+      ]}
+    >
       Select
     </S.Select>
     <S.Textarea>Textarea</S.Textarea>
-	<S.Checkbox class="mt-2 mb-2">Checkbox</S.Checkbox>
-	<S.Switch class="mt-2 mb-2">Switch</S.Switch>
+    <S.Checkbox class="mt-2 mb-2">Checkbox</S.Checkbox>
+    <S.Switch class="mt-2 mb-2">Switch</S.Switch>
     <S.Radio class="mt-2 mb-2">Radio</S.Radio>
     <S.Slider class="mt-2 mb-2">Slider</S.Slider>
   </div>
 </S.MaterialApp>
+
+<style>
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+</style>
