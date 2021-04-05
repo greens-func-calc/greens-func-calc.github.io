@@ -3,9 +3,11 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
+import css from "rollup-plugin-css-only";
+import copy from "rollup-plugin-copy";
 
 const production = !process.env.ROLLUP_WATCH;
-const { preprocess } = require('./svelte.config');
+const { preprocess } = require("./svelte.config");
 
 function serve() {
   let server;
@@ -41,12 +43,13 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    css({ output: "public/build/base.css" }),
     svelte({
       // enable run-time checks when not in production
       dev: !production,
       // we'll extract any component CSS out into
-	  // a separate file - better for performance
-	  preprocess,
+      // a separate file - better for performance
+      preprocess,
       css: (css) => {
         css.write("bundle.css");
       },
@@ -74,6 +77,12 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser(),
+
+    copy({
+      targets: [
+        { src: "node_modules/mathquill/build/font/*", dest: "public/build/font/" },
+      ]
+    })
   ],
   watch: {
     clearScreen: false,
