@@ -1,12 +1,5 @@
-// algebra
-//
-// math.js has support for symbolic computation (CAS). It can parse
-// expressions in an expression tree and do algebraic operations like
-// simplification and derivation on this tree.
-
-// load math.js (using node.js)
 // eslint-disable-next-line no-unused-vars
-const {simplify, parse, evaluate, derivative} = require("mathjs");
+const { simplify, parse, evaluate, derivative } = require("mathjs");
 
 export function GreensFctCalc(y1, y2) {
   const y1_xs = y1;
