@@ -9,13 +9,30 @@
     x_0 = "";
   let answer = "";
   $: try {
-    if (f && x_0) {
-      answer = y_p(y_1, y_2, f, x_0);
-    } else {
-      answer = GreensFctCalc(y_1, y_2);
-    }
-  } catch (e) {}
+    answer = GreensFctCalc(y_1, y_2);
+  } catch (e) {
+    // console.log(e);
+  }
+  let answer2 = "";
+  $: try {
+    answer2 = y_p(y_1, y_2, f, x_0);
+  } catch (e) {
+    console.log(e);
+  }
 </script>
+
+<style>
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  :global(.s-app) {
+    height: 100%;
+  }
+  .padding > :global(.mq-math-mode) {
+    margin-top: 25px;
+  }
+</style>
 
 <S.MaterialApp>
   <S.AppBar dense>
@@ -31,7 +48,8 @@
       nonhomogeneous differential equation $$y'' + P(x)y' + Q(x)y = f(x)$$ with
       homogeneous initial conditions \(y(x_0) = y'(x_0) = 0\) and complementary
       function $$y_c = c_1y_1 + c_2y_2,$$ enter the values of \(y_1\), \(y_2\),
-      \(f\), and \(x_0\) below.
+      \(f\), and \(x_0\) below to automatically calculate the particular
+      solution \(y_p\).
     </h6>
   </S.Container>
   <S.Container class="text-center">
@@ -46,22 +64,16 @@
       <MathInput bind:value={x_0} />
 
       <br />
-      <span class="padding">
-        <MathDisplay value={answer} />
-      </span>
+      <br />
+      <S.Divider />
+
+      <br />
+      <strong>Green's Function:</strong>
+      <MathDisplay value={answer} />
+      <br />
+      <br />
+      <strong>\(y_p\):</strong>
+      <MathDisplay value={answer2} />
     </h6>
   </S.Container>
 </S.MaterialApp>
-
-<style>
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-  :global(.s-app) {
-    height: 100%;
-  }
-  .padding > :global(.mq-math-mode) {
-    margin-top: 25px;
-  }
-</style>

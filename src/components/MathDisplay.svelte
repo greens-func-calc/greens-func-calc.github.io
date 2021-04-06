@@ -6,7 +6,7 @@
   export let value = "";
   $: mq = MathQuill.getInterface(2).MathField(inputElement, {
     spaceBehavesLikeTab: true,
-    handlers: {},
+    handlers: {}
   });
   $: if (mq) {
     mq.latex(value);
