@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { simplify, parse, evaluate, derivative } from "mathjs";
 
-export function GreensFctCalc(y1, y2) {
+export function GreensFctCalc(y1, y2, mode="tex") {
   const y1_xs = y1;
   const y2_xs = y2;
   const y1_ts = y1.replace(/x/g, "t");
@@ -16,11 +16,12 @@ export function GreensFctCalc(y1, y2) {
   const W = simplify(parse(Ws)).toString();
  
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
-  return simplify(parse(Gs)).toTex();
+  const simp = simplify(parse(Gs));
+  return mode === "string" ? simp.toString() : simp.toTex();
 }
 
 export function y_p(y1, y2, f, x_o) {
-  const Gs = GreensFctCalc(y1, y2);
+  const Gs = GreensFctCalc(y1, y2, "string");
   const integrand = simplify(parse(`(${Gs}) * ${f}`)).toString();
   const i1 = integrand.replace(/t/g, "x");
   const i2 = integrand.replace(/t/g, x_o);

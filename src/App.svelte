@@ -1,6 +1,6 @@
 <script>
   import * as S from "svelte-materialify/src";
-  import { GreensFctCalc } from "./modules/calc.js";
+  import { GreensFctCalc, y_p } from "./modules/calc.js";
   import MathInput from "./components/MathInput.svelte";
   import MathDisplay from "./components/MathDisplay.svelte";
   let y_1 = "",
@@ -9,10 +9,12 @@
     x_0 = "";
   let answer = "";
   $: try {
-    answer = GreensFctCalc(y_1, y_2, f, x_0);
-  } catch (e) {
-    // console.log(e);
-  }
+    if (f && x_0) {
+      answer = y_p(y_1, y_2, f, x_0);
+    } else {
+      answer = GreensFctCalc(y_1, y_2);
+    }
+  } catch (e) {}
 </script>
 
 <S.MaterialApp>
@@ -44,7 +46,9 @@
       <MathInput bind:value={x_0} />
 
       <br />
-      <MathDisplay value={answer} />
+      <span class="padding">
+        <MathDisplay value={answer} />
+      </span>
     </h6>
   </S.Container>
 </S.MaterialApp>
@@ -56,5 +60,8 @@
   }
   :global(.s-app) {
     height: 100%;
+  }
+  .padding > :global(.mq-math-mode) {
+    margin-top: 25px;
   }
 </style>
