@@ -1,19 +1,16 @@
 <script>
   import "mathquill/build/mathquill.js";
   import "mathquill/build/mathquill.css";
-  let viewElement;
-  export let value;
+  let inputElement;
   let mq;
-  $: mq = MathQuill.getInterface(2).MathField(viewElement, {
+  export let value = "";
+  $: mq = MathQuill.getInterface(2).MathField(inputElement, {
     spaceBehavesLikeTab: true,
+    handlers: {},
   });
   $: if (mq) {
-    console.log(value);
-    mq.typedText(value);
-    viewElement.classList.remove("mq-editable-field");
-    const e = viewElement.querySelector(".mq-textarea");
-    if (e) e.remove();
+    mq.latex(value);
   }
 </script>
 
-<span bind:this={viewElement} />
+<span bind:this={inputElement} />

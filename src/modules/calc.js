@@ -16,7 +16,7 @@ export function GreensFctCalc(y1, y2) {
   const W = simplify(parse(Ws)).toString();
  
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
-  return simplify(parse(Gs)).toString();
+  return simplify(parse(Gs)).toTex();
 }
 
 export function y_p(y1, y2, f, x_o) {
@@ -25,5 +25,5 @@ export function y_p(y1, y2, f, x_o) {
   const i1 = integrand.replace(/t/g, "x");
   const i2 = integrand.replace(/t/g, x_o);
   const yps = `(${i1}) - (${i2})`;
-  return simplify(parse(yps)).toString();
+  return simplify(parse(yps)).toTex();
 }
