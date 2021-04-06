@@ -13,33 +13,7 @@
   } catch (e) {
     // console.log(e);
   }
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    let script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
-    document.head.append(script);
-
-    script.onload = () => {
-      MathJax = {
-        tex: {
-          inlineMath: [["$", "$"], ["\\(", "\\)"]],
-          processEscapes: true
-        }
-      };
-    };
-  });
 </script>
-
-<style>
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-  :global(.s-app) {
-    height: 100%;
-  }
-</style>
 
 <S.MaterialApp>
   <S.AppBar dense>
@@ -74,3 +48,13 @@
     </h6>
   </S.Container>
 </S.MaterialApp>
+
+<style>
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  :global(.s-app) {
+    height: 100%;
+  }
+</style>
