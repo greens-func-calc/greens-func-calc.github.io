@@ -13,26 +13,23 @@
   } catch (e) {
     // console.log(e);
   }
-</script>
+  import { onMount } from "svelte";
 
-<S.MaterialApp theme="dark">
-  <S.AppBar dense>
-    <span slot="title"> Green's Function Calculator </span>
-    <div style="flex-grow:1;" />
-    <S.Button text>Link</S.Button>
-    <a href="https://github.com/TheComputerM/svelte-materialify/stargazers">
-      <S.Button text>Star</S.Button>
-    </a>
-  </S.AppBar>
-  <S.Container class="text-center">
-    <MathDisplay value="y_1=" /><MathInput bind:value={y_1} />
-    <MathDisplay value="y_2=" /><MathInput bind:value={y_2} />
-    <MathDisplay value="f=" /><MathInput bind:value={f} />
-    <MathDisplay value="x_0=" /><MathInput bind:value={x_0} />
-    <br />
-    <MathDisplay value={answer} />
-  </S.Container>
-</S.MaterialApp>
+  onMount(() => {
+    let script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+    document.head.append(script);
+
+    script.onload = () => {
+      MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          processEscapes: true
+        }
+      };
+    };
+  });
+</script>
 
 <style>
   h3 {
@@ -43,3 +40,37 @@
     height: 100%;
   }
 </style>
+
+<S.MaterialApp>
+  <S.AppBar dense>
+    <span slot="title">Green's Functions for Initial-Value Problems</span>
+    <div style="flex-grow:1;" />
+    <span style="margin-right: 25px">
+      Vignav Ramesh, Kento Nishi, Preston Fu, Nikhil Gargeya
+    </span>
+  </S.AppBar>
+  <S.Container class="text-left">
+    <h6 class="mt-4 mb-4">
+      Solve initial-value problems using Green's functions! Given the
+      nonhomogeneous differential equation $$y'' + P(x)y' + Q(x)y = f(x)$$ with
+      homogeneous initial conditions \(y(x_0) = y'(x_0) = 0\) and complementary
+      function $$y_c = c_1y_1 + c_2y_2,$$ enter the values of \(y_1\), \(y_2\),
+      \(f\), and \(x_0\) below.
+    </h6>
+  </S.Container>
+  <S.Container class="text-center">
+    <h6 class="mt-4 mb-4">
+      \(y_1 =\)
+      <MathInput bind:value={y_1} />
+      , \(y_2 =\)
+      <MathInput bind:value={y_2} />
+      , \(f =\)
+      <MathInput bind:value={f} />
+      , \(x_0 =\)
+      <MathInput bind:value={x_0} />
+
+      <br />
+      <MathDisplay value={answer} />
+    </h6>
+  </S.Container>
+</S.MaterialApp>

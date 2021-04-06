@@ -23,6 +23,7 @@
     "svelte-preprocess": "^4.5.1"
   },
   "dependencies": {
+    "mathjax": "^3.1.2",
     "mathjs": "^9.3.0",
     "mathquill": "^0.10.1-a",
     "rollup-plugin-css-only": "^3.1.0",
