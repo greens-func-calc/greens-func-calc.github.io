@@ -54,11 +54,11 @@
   </S.Container>
   <S.Container class="text-center">
     <h6 class="mt-4 mb-4">
-      \(y_1 =\)
+      \(y_1(x) =\)
       <MathInput bind:value={y_1} />
-      , \(y_2 =\)
+      , \(y_2(x) =\)
       <MathInput bind:value={y_2} />
-      , \(f =\)
+      , \(f(x) =\)
       <MathInput bind:value={f} />
       , \(x_0 =\)
       <MathInput bind:value={x_0} />
