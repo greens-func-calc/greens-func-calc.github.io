@@ -1,5 +1,11 @@
 <script>
-  import * as S from "svelte-materialify/src";
+  import {
+    MaterialApp,
+    AppBar,
+    Button,
+    Container,
+    Divider,
+  } from "svelte-materialify/src";
   import { GreensFctCalc, y_p } from "./modules/calc.js";
   import MathInput from "./components/MathInput.svelte";
   import MathDisplay from "./components/MathDisplay.svelte";
@@ -9,7 +15,7 @@
     x_0 = "";
   let answer = "";
   let answer2 = "";
-  function handleClick() {
+  function submitInputs() {
     try {
       answer = GreensFctCalc(y_1, y_2);
     } catch (e) {
@@ -21,42 +27,21 @@
       console.log(e);
     }
   }
-  function handleClick2() {
+  function clearAll() {
     answer = "";
     answer2 = "";
   }
 </script>
 
-<style>
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-  :global(.s-app) {
-    height: 100%;
-  }
-  .padding > :global(.mq-math-mode) {
-    margin-top: 25px;
-  }
-  .b {
-    background-color: rgb(253, 185, 57);
-    padding-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-  }
-</style>
-
-<S.MaterialApp>
-  <S.AppBar dense>
+<MaterialApp>
+  <AppBar dense>
     <span slot="title">Green's Functions for Initial-Value Problems</span>
     <div style="flex-grow:1;" />
     <span style="margin-right: 25px">
       Vignav Ramesh, Kento Nishi, Preston Fu, Nikhil Gargeya
     </span>
-  </S.AppBar>
-  <S.Container class="text-left">
+  </AppBar>
+  <Container class="text-left">
     <h6 class="mt-4 mb-4">
       Solve initial-value problems using Green's functions! Given the
       nonhomogeneous differential equation $$y'' + P(x)y' + Q(x)y = f(x)$$ with
@@ -65,8 +50,8 @@
       \(f\), and \(x_0\) below to automatically calculate the particular
       solution \(y_p\).
     </h6>
-  </S.Container>
-  <S.Container class="text-center">
+  </Container>
+  <Container class="text-center">
     <h6 class="mt-4 mb-4">
       \(y_1(x) =\)
       <MathInput bind:value={y_1} />
@@ -79,12 +64,12 @@
 
       <br />
       <br />
-      <button class="b" on:click={handleClick}>SUBMIT</button>
+      <Button class="yellow" on:click={submitInputs}>SUBMIT</Button>
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      <button class="b" on:click={handleClick2}>CLEAR</button>
+      <Button class="yellow" on:click={clearAll}>CLEAR</Button>
       <br />
       <br />
-      <S.Divider />
+      <Divider />
 
       <br />
       <strong>Green's Function:</strong>
@@ -94,5 +79,21 @@
       <strong>\(y_p\):</strong>
       <MathDisplay value={answer2} />
     </h6>
-  </S.Container>
-</S.MaterialApp>
+  </Container>
+</MaterialApp>
+
+<style>
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  :global(.s-app) {
+    height: 100%;
+  }
+  .padding > :global(.mq-math-mode) {
+    margin-top: 25px;
+  }
+  :global(.yellow) {
+    background-color: rgb(253, 185, 57);
+  }
+</style>
