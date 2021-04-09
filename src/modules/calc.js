@@ -2,13 +2,15 @@
 import { simplify, parse, evaluate, derivative } from "mathjs";
 
 export function GreensFctCalc(y1, y2, mode="tex") {
+  y1 = y1.replace(/\\cdot/g, "*");
+  y2 = y2.replace(/\\cdot/g, "*");
+  y1 = y1.replace(/xx/g, "x*x");
+  y2 = y2.replace(/xx/g, "x*x");
   const y1_xs = y1;
   const y2_xs = y2;
   const y1_ts = y1.replace(/x/g, "t");
   const y2_ts = y2.replace(/x/g, "t");
 
-  // const y1_x = parse(y1_xs);
-  // const y2_x = parse(y2_xs);
   const y1_t = parse(y1_ts);
   const y2_t = parse(y2_ts);
 
@@ -17,7 +19,14 @@ export function GreensFctCalc(y1, y2, mode="tex") {
  
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
   const simp = simplify(parse(Gs));
-  return mode === "string" ? simp.toString() : simp.toTex();
+  
+  var simp2 = simp.toString().replace("Infinity * ", "");
+  if (simp2.charAt(0) === "(" && simp2.charAt(simp2.length - 1) === ")") {
+    simp2 = simp2.substring(1,simp2.length - 1);
+  }
+  const simp3 = parse(simp2);
+
+  return mode === "string" ? simp3.toString() : simp3.toTex();
 }
 
 export function y_p(y1, y2, f, x_o) {

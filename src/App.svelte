@@ -8,16 +8,22 @@
     f = "",
     x_0 = "";
   let answer = "";
-  $: try {
-    answer = GreensFctCalc(y_1, y_2);
-  } catch (e) {
-    // console.log(e);
-  }
   let answer2 = "";
-  $: try {
-    answer2 = y_p(y_1, y_2, f, x_0);
-  } catch (e) {
-    console.log(e);
+  function handleClick() {
+    try {
+      answer = GreensFctCalc(y_1, y_2);
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      answer2 = y_p(y_1, y_2, f, x_0);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  function handleClick2() {
+    answer = "";
+    answer2 = "";
   }
 </script>
 
@@ -31,6 +37,14 @@
   }
   .padding > :global(.mq-math-mode) {
     margin-top: 25px;
+  }
+  .b {
+    background-color: rgb(253, 185, 57);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
   }
 </style>
 
@@ -63,6 +77,11 @@
       , \(x_0 =\)
       <MathInput bind:value={x_0} />
 
+      <br />
+      <br />
+      <button class="b" on:click={handleClick}>SUBMIT</button>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button class="b" on:click={handleClick2}>CLEAR</button>
       <br />
       <br />
       <S.Divider />
