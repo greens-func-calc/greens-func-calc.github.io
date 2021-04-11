@@ -4,9 +4,9 @@
     AppBar,
     Button,
     Container,
-    Divider,
+    Divider
   } from "svelte-materialify/src";
-  import { GreensFctCalc, y_p } from "./modules/calc.js";
+  import { GreensFctCalc, y_p, Wronskian } from "./modules/calc.js";
   import MathInput from "./components/MathInput.svelte";
   import MathDisplay from "./components/MathDisplay.svelte";
   let y_1 = "",
@@ -15,6 +15,7 @@
     x_0 = "";
   let answer = "";
   let answer2 = "";
+  let w = "";
   function submitInputs() {
     try {
       answer = GreensFctCalc(y_1, y_2);
@@ -26,12 +27,34 @@
     } catch (e) {
       console.log(e);
     }
+    try {
+      w = Wronskian(y_1, y_2);
+    } catch (e) {
+      console.log(e);
+    }
   }
   function clearAll() {
     answer = "";
     answer2 = "";
+    w = "";
   }
 </script>
+
+<style>
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  :global(.s-app) {
+    height: 100%;
+  }
+  .padding > :global(.mq-math-mode) {
+    margin-top: 25px;
+  }
+  :global(.yellow) {
+    background-color: rgb(253, 185, 57);
+  }
+</style>
 
 <MaterialApp>
   <AppBar dense>
@@ -72,28 +95,18 @@
       <Divider />
 
       <br />
+      <strong>Wronskian \(W(y_1, y_2)\):</strong>
+      <MathDisplay value={w} />
+      <br />
+      <br />
+
       <strong>Green's Function:</strong>
       <MathDisplay value={answer} />
       <br />
       <br />
       <strong>\(y_p\):</strong>
       <MathDisplay value={answer2} />
+
     </h6>
   </Container>
 </MaterialApp>
-
-<style>
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-  :global(.s-app) {
-    height: 100%;
-  }
-  .padding > :global(.mq-math-mode) {
-    margin-top: 25px;
-  }
-  :global(.yellow) {
-    background-color: rgb(253, 185, 57);
-  }
-</style>
