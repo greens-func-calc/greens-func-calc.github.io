@@ -34,7 +34,6 @@ export function GreensFctCalc(y1, y2, mode="tex") {
  
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
   const simp = simplifyExpression(parseExpression(Gs));
-  console.log(Gs, simp.toString());
   
   var simp2 = simp.toString().replace("Infinity * ", "");
   if (simp2.charAt(0) === "(" && simp2.charAt(simp2.length - 1) === ")") {
