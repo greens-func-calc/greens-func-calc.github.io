@@ -12,7 +12,7 @@
       },
     },
   });
-  $: if (mq && mq.latex() != value) mq.latex(value);
+  $: if (mq && !value) mq.latex('');
 </script>
 
 <span bind:this={inputElement} />
