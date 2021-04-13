@@ -58,6 +58,10 @@
   :global(.yellow) {
     background-color: rgb(253, 185, 57);
   }
+
+  :global(.s-btn) {
+    margin: 20px;
+  }
 </style>
 
 <MaterialApp>
@@ -92,7 +96,6 @@
       <br />
       <br />
       <Button class="yellow" on:click={submitInputs}>SUBMIT</Button>
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       <Button class="yellow" on:click={clearAll}>CLEAR</Button>
       <br />
       <br />
