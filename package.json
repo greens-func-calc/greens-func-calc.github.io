@@ -25,6 +25,7 @@
   "dependencies": {
     "mathjax": "^3.1.2",
     "mathjs": "^9.3.0",
+    "mathjs-simple-integral": "^0.1.1",
     "mathquill": "^0.10.1-a",
     "rollup-plugin-css-only": "^3.1.0",
     "sirv-cli": "^1.0.0"

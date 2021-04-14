@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { simplify, parse, derivative } from "mathjs";
+math.import(require('mathjs-simple-integral'));
 
 function simplifyExpression(...args){
   const simp = simplify(...args);
@@ -75,7 +76,8 @@ export function Wronskian(y1, y2, mode="tex") {
 
 export function y_p(y1, y2, f, x_o) {
   const Gs = GreensFctCalc(y1, y2, "string");
-  const integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
+  var integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
+  integrand = math.integral(integrand, 't');
   const i1 = integrand.replace(/t/g, "x");
   const i2 = integrand.replace(/t/g, `(${x_o})`);
   const yps = `(${i1}) - (${i2})`;
