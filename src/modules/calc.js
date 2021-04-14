@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { simplify, parse, derivative } from "mathjs";
+const nerdamer = require("nerdamer/all")
 
 function simplifyExpression(...args){
   const simp = simplify(...args);
@@ -64,7 +65,7 @@ export function Wronskian(y1, y2, mode="tex") {
   const y2_t = parseExpression(y2_ts);
 
   const Ws = `${y1_t.toString()} * ${derivative(y2_t, "t").toString()} - ${y2_t.toString()} * ${derivative(y1_t, "t").toString()}`;
-  var W = simplifyExpression(parseExpression(Ws)).toString();
+  let W = simplifyExpression(parseExpression(Ws)).toString();
   W = W.replace(/\s/g, "");
   W = W.replace(/2t/g, "2*t");
   W = W.replace("*(cos(2*t)^2+sin(2*t)^2)", "");
@@ -75,7 +76,8 @@ export function Wronskian(y1, y2, mode="tex") {
 
 export function y_p(y1, y2, f, x_o) {
   const Gs = GreensFctCalc(y1, y2, "string");
-  const integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
+  let integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
+  integrand = nerdamer('integrate(' + integrand + '), x)').toString();
   const i1 = integrand.replace(/t/g, "x");
   const i2 = integrand.replace(/t/g, `(${x_o})`);
   const yps = `(${i1}) - (${i2})`;
