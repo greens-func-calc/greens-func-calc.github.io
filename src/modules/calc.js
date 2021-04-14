@@ -2,6 +2,16 @@
 import { simplify, parse, derivative } from "mathjs";
 
 export function GreensFctCalc(y1, y2, mode="tex") {
+  y1 = y1.replace(/\\cdot/g, "*");
+  y2 = y2.replace(/\\cdot/g, "*");
+  y1 = y1.replace(/xx/g, "x*x");
+  y2 = y2.replace(/xx/g, "x*x");
+  y1 = y1.replace(/\\left/g, "");
+  y2 = y2.replace(/\\left/g, "");
+  y1 = y1.replace(/\\right/g, "");
+  y2 = y2.replace(/\\right/g, "");
+  y1 = y1.replace(/\\/g, "");
+  y2 = y2.replace(/\\/g, "");
   const y1_xs = y1;
   const y2_xs = y2;
   const y1_ts = y1.replace(/x/g, "t");
@@ -25,6 +35,12 @@ export function Wronskian(y1, y2, mode="tex") {
   y2 = y2.replace(/\\cdot/g, "*");
   y1 = y1.replace(/xx/g, "x*x");
   y2 = y2.replace(/xx/g, "x*x");
+  y1 = y1.replace(/\\left/g, "");
+  y2 = y2.replace(/\\left/g, "");
+  y1 = y1.replace(/\\right/g, "");
+  y2 = y2.replace(/\\right/g, "");
+  y1 = y1.replace(/\\/g, "");
+  y2 = y2.replace(/\\/g, "");
   const y1_xs = y1;
   const y2_xs = y2;
   const y1_ts = y1.replace(/x/g, "t");
@@ -34,7 +50,11 @@ export function Wronskian(y1, y2, mode="tex") {
   const y2_t = parse(y2_ts);
 
   const Ws = `${y1_t.toString()} * ${derivative(y2_t, "t").toString()} - ${y2_t.toString()} * ${derivative(y1_t, "t").toString()}`;
-  const W = simplify(parse(Ws));
+  var W = simplify(parse(Ws)).toString();
+  W = W.replace(/\s/g, "");
+  W = W.replace(/2t/g, "2*t");
+  W = W.replace("*(cos(2*t)^2+sin(2*t)^2)", "");
+  W = parse(W);
 
   return mode === "string" ? W.toString() : W.toTex();
 }
