@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { simplify, parse, derivative } from "mathjs";
-const nerdamer = require("nerdamer/all")
+import nerdamer from "nerdamer/all";
 
 function simplifyExpression(...args){
   const simp = simplify(...args);
@@ -77,7 +77,7 @@ export function Wronskian(y1, y2, mode="tex") {
 export function y_p(y1, y2, f, x_o) {
   const Gs = GreensFctCalc(y1, y2, "string");
   let integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
-  integrand = nerdamer('integrate(' + integrand + '), x)').toString();
+  integrand = nerdamer(`integrate(${  integrand  }), x)`).toString();
   const i1 = integrand.replace(/t/g, "x");
   const i2 = integrand.replace(/t/g, `(${x_o})`);
   const yps = `(${i1}) - (${i2})`;
