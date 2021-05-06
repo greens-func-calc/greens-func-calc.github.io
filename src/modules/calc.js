@@ -36,13 +36,19 @@ export function GreensFctCalc(y1, y2, mode="tex") {
   const y2_ts = y2.replace(/x/g, "t");
   const W = Wronskian(y1, y2, "string");
  
+  console.log(W);
+  // -(2 * (sin(2 * t) ^ 2 + cos(2 * t) ^ 2))
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
   const simp = simplifyExpression(parseExpression(Gs));
   
   var simp2 = simp.toString().replace("Infinity * ", "");
-  if (simp2.charAt(0) === "(" && simp2.charAt(simp2.length - 1) === ")") {
-    simp2 = simp2.substring(1, simp2.length - 1);
-  }
+  // console.log(simp2);
+  // (sin(2 t) * cos(2 x) - sin(2 x) * cos(2 t)) / -(2 * (sin(2 * t) ^ 2 + cos(2 * t) ^ 2))
+  // if (simp2.charAt(0) === "(" && simp2.charAt(simp2.length - 1) === ")") {
+  //   simp2 = simp2.substring(1, simp2.length - 1);
+  // }
+  console.log(simp2);
+  // sin(2 t) * cos(2 x) - sin(2 x) * cos(2 t)) / -(2 * (sin(2 * t) ^ 2 + cos(2 * t) ^ 2) WHERE_IS_THE_PARENTHESIS_TO_CLOSE
   const simp3 = parseExpression(simp2);
 
   return mode === "string" ? simp3.toString() : simp3.toTex();
@@ -77,8 +83,9 @@ export function Wronskian(y1, y2, mode="tex") {
   var W = simplifyExpression(parseExpression(Ws)).toString();
   W = W.replace(/\s/g, "");
   W = W.replace(/2t/g, "2*t");
-  W = W.replace("*(cos(2*t)^2+sin(2*t)^2)", "");
-  // TODO ANYTHING IN PARENTHESIS
+  // W = W.replace("*(cos(2*t)^2+sin(2*t)^2))", "");
+  // "*(cos(2*t)^2+sin(2*t)^2))", ""
+  // "constcos(2*t)^2 constsin(2*t)^2))", ""
   W = parseExpression(W);
 
   return mode === "string" ? W.toString() : W.toTex();
