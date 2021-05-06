@@ -1,3 +1,3 @@
-# [greens-func-calc.github.io](https://greens-func-calc.github.io/)
+# Green's Function Calculator
 
-Solve initial-value problems with nonhomogeneous differential equations and homogeneous initial conditions using Green's functions.
+Use our online tool to automatically calculate Green's functions for nonhomogeneous differential equations!
