@@ -6,7 +6,7 @@
     Container,
     Divider
   } from "svelte-materialify/src";
-  import { GreensFctCalc, y_p, Wronskian } from "./modules/calc.js";
+  import { GreensFctCalc, Wronskian } from "./modules/calc.js";
   import MathInput from "./components/MathInput.svelte";
   import MathDisplay from "./components/MathDisplay.svelte";
   let y_1 = "",
@@ -14,7 +14,7 @@
     f = "",
     x_0 = "";
   let answer = "";
-  let answer2 = "";
+  // let answer2 = "";
   let w = "";
   function submitInputs() {
     try {
@@ -35,12 +35,12 @@
   }
   function clearAll() {
     answer = "";
-    answer2 = "";
+    // answer2 = "";
     w = "";
     y_1 = "";
     y_2 = "";
-    f = "";
-    x_0 = "";
+    // f = "";
+    // x_0 = "";
   }
 </script>
 
@@ -66,20 +66,28 @@
 
 <MaterialApp>
   <AppBar dense>
-    <span slot="title">Green's Functions for Initial-Value Problems</span>
+    <!-- <span slot="title">Green's Functions for Initial-Value Problems</span> -->
+    <span slot="title">Green's Function Calculator</span>
     <div style="flex-grow:1;" />
     <span style="margin-right: 25px">
       Vignav Ramesh, Kento Nishi, Preston Fu, Nikhil Gargeya
     </span>
   </AppBar>
   <Container class="text-left">
-    <h6 class="mt-4 mb-4">
-      Solve initial-value problems using Green's functions! Given the
+    <!-- <h6 class="mt-4 mb-4">
+      Use this online tool to automatically calculate Green's functions! Given the
       nonhomogeneous differential equation $$y'' + P(x)y' + Q(x)y = f(x)$$ with
       homogeneous initial conditions \(y(x_0) = y'(x_0) = 0\) and complementary
       function $$y_c = c_1y_1 + c_2y_2,$$ enter the values of \(y_1\), \(y_2\),
       \(f\), and \(x_0\) below to automatically calculate the particular
       solution \(y_p\).
+    </h6> -->
+    <h6 class="mt-4 mb-4">
+      Use this online tool to automatically calculate Green's functions! Given the
+      nonhomogeneous differential equation $$y'' + P(x)y' + Q(x)y = f(x),$$the Green's function is given by
+      $$G(x,t) = \frac{'{'}y_1(t)y_2(x) - y_1(x)y_2(t){'}'}{'{'}W(t){'}'},$$ where \( W(t) \) is the Wronskian and is given by
+      $$W(y_1(t), y_2(t)) = \begin{'{'}vmatrix{'}'}y_1{'{'}t{'}'} & y_2{'{'}t{'}'} \\ y_1'(t) & y_2'(t) \end{'{'}vmatrix{'}'}.$$ Enter the values of \(y_1\) and \(y_2\)
+       below to automatically calculate the Wronskian and Green's function!
     </h6>
   </Container>
   <Container class="text-center">
@@ -88,10 +96,10 @@
       <MathInput bind:value={y_1} />
       , \(y_2(x) =\)
       <MathInput bind:value={y_2} />
-      , \(f(x) =\)
-      <MathInput bind:value={f} />
+      <!-- , \(f(x) =\) -->
+      <!-- <MathInput bind:value={f} />
       , \(x_0 =\)
-      <MathInput bind:value={x_0} />
+      <MathInput bind:value={x_0} /> -->
 
       <br />
       <br />
@@ -109,10 +117,10 @@
 
       <strong>Green's Function:</strong>
       <MathDisplay value={answer} />
-      <br />
+      <!-- <br />
       <br />
       <strong>\(y_p\):</strong>
-      <MathDisplay value={answer2} />
+      <MathDisplay value={answer2} /> -->
 
     </h6>
   </Container>

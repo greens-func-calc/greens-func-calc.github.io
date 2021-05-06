@@ -73,11 +73,11 @@ export function Wronskian(y1, y2, mode="tex") {
   return mode === "string" ? W.toString() : W.toTex();
 }
 
-export function y_p(y1, y2, f, x_o) {
-  const Gs = GreensFctCalc(y1, y2, "string");
-  const integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
-  const i1 = integrand.replace(/t/g, "x");
-  const i2 = integrand.replace(/t/g, `(${x_o})`);
-  const yps = `(${i1}) - (${i2})`;
-  return simplifyExpression(parseExpression(yps)).toTex();
-}
+// export function y_p(y1, y2, f, x_o) {
+//   const Gs = GreensFctCalc(y1, y2, "string");
+//   const integrand = simplifyExpression(parseExpression(`(${Gs}) * ${f}`)).toString();
+//   const i1 = integrand.replace(/t/g, "x");
+//   const i2 = integrand.replace(/t/g, `(${x_o})`);
+//   const yps = `(${i1}) - (${i2})`;
+//   return simplifyExpression(parseExpression(yps)).toTex();
+// }
