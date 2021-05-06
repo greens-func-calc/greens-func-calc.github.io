@@ -18,6 +18,10 @@ function parseExpression(...args){
 export function GreensFctCalc(y1, y2, mode="tex") {
   y1 = y1.replace(/\\cdot/g, "*");
   y2 = y2.replace(/\\cdot/g, "*");
+  y1 = y1.replace(/\{/g, "(");
+  y2 = y2.replace(/\{/g, "(");
+  y1 = y1.replace(/\}/g, ")");
+  y2 = y2.replace(/\}/g, ")");
   y1 = y1.replace(/xx/g, "x*x");
   y2 = y2.replace(/xx/g, "x*x");
   y1 = y1.replace(/\\left/g, "");
@@ -47,6 +51,10 @@ export function GreensFctCalc(y1, y2, mode="tex") {
 export function Wronskian(y1, y2, mode="tex") {
   y1 = y1.replace(/\\cdot/g, "*");
   y2 = y2.replace(/\\cdot/g, "*");
+  y1 = y1.replace(/\{/g, "(");
+  y2 = y2.replace(/\{/g, "(");
+  y1 = y1.replace(/\}/g, ")");
+  y2 = y2.replace(/\}/g, ")");
   y1 = y1.replace(/xx/g, "x*x");
   y2 = y2.replace(/xx/g, "x*x");
   y1 = y1.replace(/\\left/g, "");
@@ -60,6 +68,8 @@ export function Wronskian(y1, y2, mode="tex") {
   const y1_ts = y1.replace(/x/g, "t");
   const y2_ts = y2.replace(/x/g, "t");
 
+  console.log(y1_ts, y2_ts);
+
   const y1_t = parseExpression(y1_ts);
   const y2_t = parseExpression(y2_ts);
 
@@ -68,6 +78,7 @@ export function Wronskian(y1, y2, mode="tex") {
   W = W.replace(/\s/g, "");
   W = W.replace(/2t/g, "2*t");
   W = W.replace("*(cos(2*t)^2+sin(2*t)^2)", "");
+  // TODO ANYTHING IN PARENTHESIS
   W = parseExpression(W);
 
   return mode === "string" ? W.toString() : W.toTex();

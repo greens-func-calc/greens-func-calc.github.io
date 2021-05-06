@@ -22,11 +22,11 @@
     } catch (e) {
       console.log(e);
     }
-    try {
-      answer2 = y_p(y_1, y_2, f, x_0);
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   answer2 = y_p(y_1, y_2, f, x_0);
+    // } catch (e) {
+    //   console.log(e);
+    // }
     try {
       w = Wronskian(y_1, y_2);
     } catch (e) {
