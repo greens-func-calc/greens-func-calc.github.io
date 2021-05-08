@@ -19,12 +19,12 @@
     try {
       answer = GreensFctCalc(y_1, y_2);
     } catch (e) {
-      console.log(e);
+      alert(e.toString());
     }
     try {
       w = Wronskian(y_1, y_2);
     } catch (e) {
-      console.log(e);
+      alert(e.toString());
     }
   }
   function clearAll() {

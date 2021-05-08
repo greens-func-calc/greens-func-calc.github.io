@@ -8,7 +8,11 @@
     spaceBehavesLikeTab: true,
     handlers: {
       edit: () => {
-        value = mq.latex();
+        value = mq
+          .text()
+          .replaceAll('\\s*i*n *', 'sin')
+          .replaceAll('\\c*o*s *', 'cos');
+        console.log(value);
       },
     },
   });
