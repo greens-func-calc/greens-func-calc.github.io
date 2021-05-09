@@ -22,6 +22,8 @@ export function GreensFctCalc(y1, y2, mode="tex") {
   const y2_ts = y2.replace(/x/g, "t ");
   const W = Wronskian(y1, y2, "string");
  
+  if (W == "0") return "";
+
   const Gs = `(${y1_ts} * ${y2_xs} - ${y1_xs} * ${y2_ts}) / (${W})`;
   const simp = simplifyExpression(parseExpression(Gs));
   
