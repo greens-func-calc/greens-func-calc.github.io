@@ -1,6 +1,8 @@
 <script>
   import 'mathquill/build/mathquill.js';
   import 'mathquill/build/mathquill.css';
+  import AlgebraLatex from 'algebra-latex';
+  import { parse } from 'mathjs';
   let inputElement;
   let mq;
   export let value = '';
@@ -8,11 +10,10 @@
     spaceBehavesLikeTab: true,
     handlers: {
       edit: () => {
-        value = mq
-          .text()
-          .replaceAll('\\s*i*n *', 'sin')
-          .replaceAll('\\c*o*s *', 'cos');
-        console.log(value);
+        try {
+          value = new AlgebraLatex().parseLatex(mq.latex()).toMath();
+        } catch (e) {
+        }
       },
     },
   });
