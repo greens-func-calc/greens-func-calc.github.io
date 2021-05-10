@@ -40,7 +40,7 @@ export function Wronskian(y1, y2, mode="tex") {
   const y1_t = parseExpression(y1_ts);
   const y2_t = parseExpression(y2_ts);
 
-  const Ws = `${y1_t.toString()} * ${derivative(y2_t, "t").toString()} - ${y2_t.toString()} * ${derivative(y1_t, "t").toString()}`;
+  const Ws = `(${y1_t.toString()}) * (${derivative(y2_t, "t").toString()}) - (${y2_t.toString()}) * (${derivative(y1_t, "t").toString()})`;
   let W = simplifyExpression(parseExpression(Ws)).toString();
   W = W.replace(/\s/g, "");
   W = parseExpression(W);
